@@ -1,0 +1,108 @@
+/*------------------
+		GRID
+-------------------*/
+@use "theme" as *;
+@use "utilities" as *;
+
+// Global
+.flex-row {
+	flex-direction: row;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-fill {
+	flex: 1 1 auto;
+}
+
+.vw-100 {
+	width: 100vw;
+}
+
+.vh-100 {
+	height: 100vh;
+}
+
+// Displays
+$display-list: none, block, inline, inline-block, flex;
+
+@each $display in $display-list {
+	.d-#{$display} {
+		display: $display;
+	}
+
+	@each $key, $value in $breakpoints-list {
+		@media (min-width: #{$value}) {
+			.d-#{$key}-#{$display} {
+				display: $display;
+			}
+		}
+	}
+}
+
+// Alignments
+$flex-align-list: start, end, center, baseline, stretch;
+$flex-justify-list: start, end, center, between, around, evenly;
+
+@each $align in $flex-align-list {
+	.align-items-#{$align} {
+		align-items: $align;
+	}
+}
+
+@each $justify in $flex-justify-list {
+	.justify-content-#{$justify} {
+		@if $justify == "between" or $justify == "around" or $justify == "evenly" {
+			justify-content: space-#{$justify};
+		} @else {
+			justify-content: $justify;
+		}
+	}
+}
+
+// Row
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+// Columns + container
+.container {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 $gutter-default;
+}
+
+$col-nb-max: 12;
+$container-wmax-list: (
+	xs: 100%,
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: 1580px,
+	xxl: 1580px,
+);
+
+@for $i from 1 through $col-nb-max {
+	.col-#{$i} {
+		width: calc(100% / (#{$col-nb-max} / #{$i}));
+		padding: $gutter-default;
+	}
+}
+
+@each $key, $value in $breakpoints-list {
+	@media (min-width: #{$value}) {
+		@for $i from 1 through $col-nb-max {
+			.col-#{$key}-#{$i} {
+				width: calc(100% / (#{$col-nb-max} / #{$i}));
+			}
+		}
+	}
+
+	.container {
+		max-width: map-get($container-wmax-list, $key);
+	}
+}

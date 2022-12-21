@@ -1,0 +1,100 @@
+/*------------------
+		LAYOUT
+-------------------*/
+@use "theme" as *;
+@use "helpers/functions" as fn;
+
+// Global
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: $font-size-ratio;
+}
+
+body {
+	margin: 0;
+	font-family: $font-family;
+	font-size: $font-size-sm;
+	line-height: $lineHeight-default;
+	background-color: fn.getColor($theme-colorscheme, light, main);
+	color: fn.getColor($theme-colorscheme, light, text);
+
+	@media (min-width: map-get($breakpoints-list, lg)) {
+		font-size: $font-size-md;
+	}
+}
+
+@for $i from 1 through 6 {
+	h#{$i},
+	.h#{$i} {
+		display: block;
+		margin: 0;
+		padding: 0;
+		margin-bottom: 0.7em;
+		font-weight: $font-weight-bold;
+		line-height: $lineHeight-title;
+	}
+}
+
+ul,
+ol {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+img {
+	max-width: 100%;
+}
+
+input {
+	height: $input-h;
+	padding: $input-py $input-px;
+	border: none;
+	border-radius: $radius-default;
+	font-family: $font-family;
+	background-color: $color-light;
+	color: $color-text-dark;
+}
+
+::placeholder {
+	font-family: $font-family;
+}
+
+.main-content {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background-color: fn.getColor($theme-colorscheme, medium, main);
+	color: fn.getColor($theme-colorscheme, medium, text);
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	margin: 15px 0;
+}
+
+.form-label {
+	margin-bottom: 5px;
+	font-size: smaller;
+}
+
+.form-control {
+	border: solid 1px lightgray;
+}
+
+.form-help {
+	margin: 3px 0 0 0;
+	font-size: x-small;
+
+	&.is-danger {
+		color: red;
+	}
+}

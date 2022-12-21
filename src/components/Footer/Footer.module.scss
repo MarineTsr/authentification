@@ -1,0 +1,15 @@
+/*------------------
+		FOOTER
+-------------------*/
+@use "assets/styles/theme" as *;
+@use "assets/styles/helpers/functions" as fn;
+
+.footerMain {
+	padding: $footer-py $footer-py;
+	background-color: fn.getColor($theme-colorscheme, dark, main);
+	color: fn.getColor($theme-colorscheme, dark, text);
+
+	&__copyright {
+		font-size: $font-size-xs;
+	}
+}
