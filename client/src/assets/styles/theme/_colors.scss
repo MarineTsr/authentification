@@ -2,8 +2,8 @@
 		COLORS
 -------------------*/
 
-$color-primary: #8e44ad;
-$color-secondary: #9b59b6;
+$color-primary: #5758bb;
+$color-secondary: #9980fa;
 $color-light: white;
 $color-medium: #edeff1;
 $color-dark: #2f3542;
@@ -24,7 +24,7 @@ $theme-colorscheme: (
 	secondary: (
 		main: $color-secondary,
 		hover: $color-primary,
-		text: $color-text-dark,
+		text: $color-text-light,
 	),
 	light: (
 		main: $color-light,

@@ -8,11 +8,9 @@ function App() {
     <div className="d-flex flex-column flex-fill vh-100">
       <Header />
       <main className="main-content flex-fill">
-        <div className="container">
-          <Suspense>
-            <Outlet />
-          </Suspense>
-        </div>
+        <Suspense>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
     </div>

@@ -1,5 +1,9 @@
 function Home() {
-  return <h2>Homepage</h2>;
+  return (
+    <div className="container">
+      <h2 className="text-center">Homepage</h2>
+    </div>
+  );
 }
 
 export default Home;

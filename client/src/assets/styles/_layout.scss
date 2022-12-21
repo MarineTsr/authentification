@@ -88,6 +88,10 @@ input {
 
 .form-control {
 	border: solid 1px lightgray;
+
+	&.is-danger {
+		border-color: red;
+	}
 }
 
 .form-help {
@@ -97,4 +101,9 @@ input {
 	&.is-danger {
 		color: red;
 	}
+}
+
+.back-link {
+	text-decoration: underline;
+	font-size: smaller;
 }
