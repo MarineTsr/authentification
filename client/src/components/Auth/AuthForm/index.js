@@ -1,9 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { createUser } from "api";
 
 function AuthForm({ existingUser }) {
+  // REDIRECTION INIT ---
+  const navigate = useNavigate();
+
   // FORM SCHEMA ---
   const userSchema = yup.object({
     pseudo: yup.string().required("Le champ est obligatoire"),
@@ -48,10 +52,12 @@ function AuthForm({ existingUser }) {
     try {
       clearErrors();
 
-      const response = "";
+      console.log(data);
+      const user = await createUser(data);
 
-      if (response.ok) {
+      if (user) {
         reset(defaultValues);
+        navigate("/auth/connexion");
       }
     } catch (err) {
       setError("globalErr", {
