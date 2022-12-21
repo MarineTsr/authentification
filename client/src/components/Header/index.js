@@ -12,11 +12,11 @@ function Header() {
 
       <div className="d-flex ml-4">
         <NavLink
-          to="/mystery"
+          to="/auth"
           className="btn btn--outlined btn--light ml-3 ml-lg-4"
         >
-          <i className="fa-solid fa-question"></i>
-          <span className="ml-2 d-none d-sm-inline">Mystery</span>
+          <i className="fa-solid fa-user"></i>
+          <span className="ml-2 d-none d-sm-inline">Connexion</span>
         </NavLink>
       </div>
     </header>

@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { Outlet } from "react-router-dom";
 import Header from "components/Header";
 import Footer from "components/Footer";
 
@@ -7,7 +9,9 @@ function App() {
       <Header />
       <main className="main-content flex-fill">
         <div className="container">
-          <h1>Hello world !</h1>
+          <Suspense>
+            <Outlet />
+          </Suspense>
         </div>
       </main>
       <Footer />
