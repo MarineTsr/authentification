@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { signIn } from "api";
 
 function Signin() {
   // REDIRECTION INIT ---
@@ -42,11 +43,11 @@ function Signin() {
   const formSubmit = async (data, event) => {
     try {
       clearErrors();
-      // const user = await createUser(data);
+      const user = await signIn(data);
 
-      // if (user) {
-      //   reset(defaultValues);
-      // }
+      if (user) {
+        reset(defaultValues);
+      }
     } catch (err) {
       setError("globalErr", {
         type: "globalErr",

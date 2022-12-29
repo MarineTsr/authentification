@@ -4,12 +4,6 @@ import Header from "components/Header";
 import Footer from "components/Footer";
 
 function App() {
-  const test = async () => {
-    console.log("test");
-  };
-
-  test();
-
   return (
     <div className="d-flex flex-column flex-fill vh-100">
       <Header />
