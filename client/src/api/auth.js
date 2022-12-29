@@ -15,7 +15,18 @@ export const signIn = async (user) => {
     if (body) {
       throw body;
     } else {
-      throw new Error("Oops une erreur est survenue");
+      throw new Error("Connexion impossible");
     }
   }
+};
+
+export const signOut = async () => {
+  await fetch(AUTH_API, {
+    method: "DELETE",
+  });
+};
+
+export const getCurrentUser = async () => {
+  const response = await fetch(`${AUTH_API}/current`);
+  return response.json();
 };

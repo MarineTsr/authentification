@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signIn } from "api";
+import { AuthContext } from "context/AuthContext";
 
 function Signin() {
+  const { user, login } = useContext(AuthContext);
+
   // REDIRECTION INIT ---
 
   // FORM SCHEMA ---
@@ -43,7 +46,7 @@ function Signin() {
   const formSubmit = async (data, event) => {
     try {
       clearErrors();
-      const user = await signIn(data);
+      const user = await login(data);
 
       if (user) {
         reset(defaultValues);
@@ -58,52 +61,59 @@ function Signin() {
 
   return (
     <>
-      <h3 className="text-center">Connexion</h3>
-      <form onSubmit={handleSubmit(formSubmit)}>
-        {errors?.globalErr && (
-          <div className="message is-danger">
-            <span className="message-body">{errors.globalErr.message}</span>
-          </div>
-        )}
+      {user ? (
+        <Navigate to="/compte" />
+      ) : (
+        <>
+          {" "}
+          <h3 className="text-center">Connexion</h3>
+          <form onSubmit={handleSubmit(formSubmit)}>
+            {errors?.globalErr && (
+              <div className="message is-danger">
+                <span className="message-body">{errors.globalErr.message}</span>
+              </div>
+            )}
 
-        <div className="form-group">
-          <input
-            type="email"
-            placeholder="Email"
-            className={`${errors?.email ? "is-danger " : ""}form-control`}
-            {...register("email")}
-          />
-          {errors?.email && (
-            <p className="form-help is-danger">{errors.email.message}</p>
-          )}
-        </div>
+            <div className="form-group">
+              <input
+                type="email"
+                placeholder="Email"
+                className={`${errors?.email ? "is-danger " : ""}form-control`}
+                {...register("email")}
+              />
+              {errors?.email && (
+                <p className="form-help is-danger">{errors.email.message}</p>
+              )}
+            </div>
 
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Mot de passe"
-            className={`${errors?.pwd ? "is-danger " : ""}form-control`}
-            {...register("pwd")}
-          />
-          {errors?.pwd && (
-            <p className="form-help is-danger">{errors.pwd.message}</p>
-          )}
-        </div>
+            <div className="form-group">
+              <input
+                type="password"
+                placeholder="Mot de passe"
+                className={`${errors?.pwd ? "is-danger " : ""}form-control`}
+                {...register("pwd")}
+              />
+              {errors?.pwd && (
+                <p className="form-help is-danger">{errors.pwd.message}</p>
+              )}
+            </div>
 
-        <div className="d-flex flex-column align-items-center mt-5">
-          <Link to="../inscription" className="back-link">
-            Créer un compte
-          </Link>
+            <div className="d-flex flex-column align-items-center mt-5">
+              <Link to="../inscription" className="back-link">
+                Créer un compte
+              </Link>
 
-          <button
-            type="submit"
-            className="btn btn--filled btn--secondary mt-5"
-            disabled={isSubmitting}
-          >
-            Connexion
-          </button>
-        </div>
-      </form>
+              <button
+                type="submit"
+                className="btn btn--filled btn--secondary mt-5"
+                disabled={isSubmitting}
+              >
+                Connexion
+              </button>
+            </div>
+          </form>
+        </>
+      )}
     </>
   );
 }

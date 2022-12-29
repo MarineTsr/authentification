@@ -29,4 +29,33 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/current", async (req, res) => {
+  const { token } = req.cookies;
+
+  if (token) {
+    try {
+      const decodedToken = jsonwebtoken.verify(token, keyPub);
+      const user = await UserModel.findById(decodedToken.sub)
+        .select("-pwd -__v")
+        .exec();
+
+      if (user) {
+        return res.json(user);
+      } else {
+        return res.json(null);
+      }
+    } catch (err) {
+      console.log(err);
+      return res.json(null);
+    }
+  } else {
+    return res.json(null);
+  }
+});
+
+router.delete("/", (req, res) => {
+  res.clearCookie("token");
+  res.end();
+});
+
 module.exports = router;
